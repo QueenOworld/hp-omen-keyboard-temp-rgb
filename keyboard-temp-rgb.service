@@ -1,0 +1,7 @@
+[Unit]
+Description=Keyboard Temp RGB Daemon
+After=display-manager.service
+[Service]
+ExecStart=/usr/bin/keyboard-temp-rgb
+[Install]
+WantedBy=multi-user.target

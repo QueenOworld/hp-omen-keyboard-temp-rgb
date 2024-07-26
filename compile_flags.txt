@@ -1,0 +1,4 @@
+-O2
+-Wall
+-o keyboard-temp-rgb
+./src/main.cpp
