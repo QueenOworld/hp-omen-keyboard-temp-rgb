@@ -78,11 +78,6 @@ int main() {
         std::ifstream thermal0("/sys/class/thermal/thermal_zone0/temp");
         std::ifstream thermal1("/sys/class/thermal/thermal_zone1/temp");
 
-        std::ofstream zone00("/sys/devices/platform/hp-wmi/rgb_zones/zone00");
-        std::ofstream zone01("/sys/devices/platform/hp-wmi/rgb_zones/zone01");
-        std::ofstream zone02("/sys/devices/platform/hp-wmi/rgb_zones/zone02");
-        std::ofstream zone03("/sys/devices/platform/hp-wmi/rgb_zones/zone03");
-
         std::string temp0;
         std::string temp1;
 
@@ -90,6 +85,11 @@ int main() {
         thermal1 >> temp1;
 
         int average = (stoi(temp0) + stoi(temp1)) / 2;
+
+        std::ofstream zone00("/sys/devices/platform/hp-wmi/rgb_zones/zone00");
+        std::ofstream zone01("/sys/devices/platform/hp-wmi/rgb_zones/zone01");
+        std::ofstream zone02("/sys/devices/platform/hp-wmi/rgb_zones/zone02");
+        std::ofstream zone03("/sys/devices/platform/hp-wmi/rgb_zones/zone03");
 
         hsv_color color_hsv =
             hsv_color{(unsigned char)(348 - 4 * (average / 1000)), 255, 255};
@@ -103,13 +103,10 @@ int main() {
         std::string output(stream.str());
 
         zone00 << output;
-
         zone01 << output;
-
         zone02 << output;
-
         zone03 << output;
 
-        sleep(2);
+        sleep(1);
     }
 }
